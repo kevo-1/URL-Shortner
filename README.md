@@ -21,3 +21,13 @@ Before you begin, ensure that you have the following installed:
 
 - Go (v1.16 or higher) - [Install Go](https://golang.org/doc/install)
 - MySQL (if using MySQL as the database) - [Install MySQL](https://dev.mysql.com/downloads/installer/)
+
+## Database
+
+Run this script in your MySQL database to create the required table
+
+```sql
+CREATE TABLE urldata (
+    shortened varchar(10) PRIMARY KEY,
+    original varchar(2048) NOT NULL
+);
