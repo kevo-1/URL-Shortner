@@ -1,10 +1,9 @@
 package main
 
 import (
-	"UrlShortner/utils"
 	"UrlShortner/Db"
+	"UrlShortner/utils"
 	"fmt"
-	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -17,9 +16,9 @@ func main() {
 		return
 	}
 
-	domain := os.Getenv("DOMAIN")
+	domain := db.GetDomain()
 	if domain == "" {
-		fmt.Println("Not loaded")
+		fmt.Println("Domain Not loaded")
 	}
 
 	db.StartDB()
@@ -27,7 +26,7 @@ func main() {
 	var URL string
 	fmt.Scanln(&URL)
 	hashed := utils.MD5Hash(URL)
-	shortLink := fmt.Sprintf("%s%s", domain, hashed[:6])
+	shortLink := fmt.Sprintf("%s%s", domain, hashed[:8])
 	fmt.Println("Original Link: ", URL,"\nShortened Link: ", shortLink)
 	
 	db.InsertData(hashed[:8], URL)

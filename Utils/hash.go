@@ -15,7 +15,7 @@ const (
 )
 
 //padding function
-func addPadding(str []byte) []byte { 
+func AddPadding(str []byte) []byte { 
 	// we need to store the original length of the URL/Message so we can append it after the padding
 	sLen := len(str)
 	str = append(str, 0x80)
@@ -37,7 +37,7 @@ func addPadding(str []byte) []byte {
 }
 
 func Hash(str []byte) []byte{
-	str = addPadding(str)
+	str = AddPadding(str)
 
 	var buffers []uint32 = make([]uint32, 4)
 		buffers[0] = A
@@ -46,7 +46,6 @@ func Hash(str []byte) []byte{
 		buffers[3] = D
 	
 	for i := 0; i < len(str); i+=64 {
-		
 		temp := str[i:i+64]
 		var M [16]uint32
 		for	j := 0; j < 16; j++ {
